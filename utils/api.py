@@ -33,7 +33,7 @@ def send_request(prompt: str) -> str:
 
 
 if __name__ == "__main__":
-    test_prompt = "Привет, кто ты?"
+    test_prompt = "пиво любишь?"
     try:
         print("Sending:", test_prompt)
         reply = send_request(test_prompt)
