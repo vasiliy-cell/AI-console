@@ -7,6 +7,7 @@ class AICLI(App):
     CSS = """
     Screen {
         layout: vertical;
+        background: $surface-darken-3;  
     }
 
     #main-area {
@@ -16,16 +17,20 @@ class AICLI(App):
 
     #left-panel {
         width: 2fr;          
-        border: tall $primary;
+        border: tall $accent;
         margin: 1 1;
         background: $surface-darken-3;
+        border: round $primary;  
     }
 
     #right-panel {
         width: 1fr;         
-        border: tall $secondary;
+        border: tall $accent;
         margin: 1 1 1 0;
         background: $surface-darken-3;
+        border: round $primary;  
+        
+
     }
 
     #bottom-bar {
@@ -37,11 +42,20 @@ class AICLI(App):
     Input {
         width: 1fr;
         margin-right: 1;
+        border: round ;  
+        background: $surface-darken-3;
     }
 
     Button {
         margin-right: 1;
+        border: round ; 
+        background: $surface-darken-3; 
     }
+
+#   Button#btn-answer {
+#     background: $accent;
+#     color: $text;
+#     }
 
     Footer { height: 1; }
     """
@@ -52,14 +66,14 @@ class AICLI(App):
         # Основная область — горизонтально делим 2:1
         with Horizontal(id="main-area"):
             with Container(id="left-panel"):
-                yield Static("Левая панель (терминал/чат)\n2/3 ширины", id="term")
+                yield Static(id="term")
 
             with Container(id="right-panel"):
-                yield Static("Правая панель\n1/3 ширины\n(инфо, история, настройки и т.д.)")
+                yield Static()
 
         # Нижняя панель ввода
         with Horizontal(id="bottom-bar"):
-            yield Input(placeholder="Введите сообщение...")
+            yield Input(placeholder="")
             yield Button("Answer", id="btn-answer")
             yield Button("Run", id="btn-run")
             yield Button("CLI", id="btn-cli")
