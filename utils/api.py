@@ -1,5 +1,5 @@
 import requests
-from config_loader import load_api_key, ConfigError
+from lib import load_api_key, ConfigError
 from errors import APIError
 
 DEEPSEEK_URL = "https://api.deepseek.com/v1/chat/completions"

@@ -1,39 +1,74 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Static, Input, Button, Footer, Header
-from textual.containers import Horizontal, Vertical
+from textual.containers import Container, Horizontal, Vertical
 
-class TerminalApp(App):
+
+class AICLI(App):
     CSS = """
     Screen {
-        background: #0d1117;         
-        color: #f0f6fc;
+        layout: vertical;
     }
 
+    #main-area {
+        height: 1fr;
+        layout: horizontal;
+    }
 
+    #left-panel {
+        width: 2fr;          
+        border: tall $primary;
+        margin: 1 1;
+        background: $surface-darken-3;
+    }
 
-    #left  { width: 2fr; background: $surface; }
-    #right { width: 1fr; background: $panel; padding: 1; }
-    Input { margin: 1 0; }
-    .buttons { height: 3; }
+    #right-panel {
+        width: 1fr;         
+        border: tall $secondary;
+        margin: 1 1 1 0;
+        background: $surface-darken-3;
+    }
+
+    #bottom-bar {
+        height: 3;
+        dock: bottom;
+        margin-bottom: 2;
+    }
+
+    Input {
+        width: 1fr;
+        margin-right: 1;
+    }
+
+    Button {
+        margin-right: 1;
+    }
+
+    Footer { height: 1; }
     """
 
     def compose(self) -> ComposeResult:
         yield Header()
-        with Horizontal():
-            with Vertical(id="left"):
-                yield Static("Тут будет терминал (пока заглушка)", id="term")
-            
-            with Vertical(id="right"):
-                yield Input(placeholder="Введи текст...")
-                with Horizontal(classes="buttons"):
-                    yield Button("Отправить", variant="primary")
-                    yield Button("Очистить", variant="error")
+
+        # Основная область — горизонтально делим 2:1
+        with Horizontal(id="main-area"):
+            with Container(id="left-panel"):
+                yield Static("Левая панель (терминал/чат)\n2/3 ширины", id="term")
+
+            with Container(id="right-panel"):
+                yield Static("Правая панель\n1/3 ширины\n(инфо, история, настройки и т.д.)")
+
+        # Нижняя панель ввода
+        with Horizontal(id="bottom-bar"):
+            yield Input(placeholder="Введите сообщение...")
+            yield Button("Answer", id="btn-answer")
+            yield Button("Run", id="btn-run")
+            yield Button("CLI", id="btn-cli")
+
         yield Footer()
 
-    def on_button_pressed(self, event):
-        if event.button.label == "Очистить":
-            self.query_one("#term").update("")
 
-app = TerminalApp()
 if __name__ == "__main__":
-    app.run()
+    AICLI().run()
+
+
+
