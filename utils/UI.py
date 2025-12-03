@@ -1,13 +1,12 @@
 from textual.app import App, ComposeResult
-from textual.widgets import Static, Input, Button, Footer, Header
+from textual.widgets import Static, Input, Button
 from textual.containers import Container, Horizontal, Vertical
-
 
 class AICLI(App):
     CSS = """
     Screen {
         layout: vertical;
-        background: $surface-darken-3;  
+        background: $surface-darken-3;
     }
 
     #main-area {
@@ -16,73 +15,72 @@ class AICLI(App):
     }
 
     #left-panel {
-        width: 2fr;          
-        border: tall $accent;
+        width: 2fr;
+        border: round $accent;
         margin: 1 1;
         background: $surface-darken-3;
-        border: round $primary;  
     }
 
     #right-panel {
-        width: 1fr;         
-        border: tall $accent;
+        width: 1fr;
+        border: round $accent;
         margin: 1 1 1 0;
         background: $surface-darken-3;
-        border: round $primary;  
-        
-
+        layout: vertical; /* Используем vertical layout для размещения элементов друг под другом */
+        padding: 1; /* Добавим немного отступа внутри панели */
     }
 
-    #bottom-bar {
-        height: 3;
-        dock: bottom;
-        margin-bottom: 2;
+    /* Новый класс для "распорки", которая занимает все доступное пространство */
+    .spacer {
+        height: 1fr; 
+        /* Мы можем оставить его пустым, он просто будет растягиваться */
+    }
+
+    /* Контролы больше не нуждаются в auto-margin */
+    #right-panel-controls {
+        height: auto; 
     }
 
     Input {
         width: 1fr;
-        margin-right: 1;
-        border: round ;  
+        margin-bottom: 1; 
+        border: round $accent;
         background: $surface-darken-3;
     }
 
-    Button {
-        margin-right: 1;
-        border: round ; 
-        background: $surface-darken-3; 
+    #button-container {
+        layout: horizontal;
+        height: auto;
     }
 
-#   Button#btn-answer {
-#     background: $accent;
-#     color: $text;
-#     }
-
-    Footer { height: 1; }
+    Button {
+        width: 1fr; 
+        margin-right: 1;
+        border: round $accent;
+        background: $surface-darken-3;
+    }
+    
+    Button:last-child {
+        margin-right: 0;
+    }
     """
 
     def compose(self) -> ComposeResult:
-        yield Header()
-
-        # Основная область — горизонтально делим 2:1
         with Horizontal(id="main-area"):
             with Container(id="left-panel"):
                 yield Static(id="term")
-
+            
             with Container(id="right-panel"):
-                yield Static()
+  
+                yield Static(classes="spacer") 
+                
+                with Vertical(id="right-panel-controls"):
+                    yield Input(placeholder="", id="user-input")
+                    with Horizontal(id="button-container"):
+                        yield Button("Answer", id="btn-answer")
+                        yield Button("Run", id="btn-run")
 
-        # Нижняя панель ввода
-        with Horizontal(id="bottom-bar"):
-            yield Input(placeholder="")
-            yield Button("Answer", id="btn-answer")
-            yield Button("Run", id="btn-run")
-            yield Button("CLI", id="btn-cli")
-
-        yield Footer()
 
 
 if __name__ == "__main__":
     AICLI().run()
-
-
-
