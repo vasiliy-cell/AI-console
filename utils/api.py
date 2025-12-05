@@ -2,6 +2,7 @@ import requests
 from lib import load_api_key, ConfigError
 from errors import APIError
 
+
 DEEPSEEK_URL = "https://api.deepseek.com/v1/chat/completions"
 
 def send_request(prompt: str) -> str:
@@ -32,12 +33,12 @@ def send_request(prompt: str) -> str:
         raise APIError(f"Config error: {e}") from e
 
 
-if __name__ == "__main__":
-    test_prompt = "пиво любишь?"
-    try:
-        print("Sending:", test_prompt)
-        reply = send_request(test_prompt)
-        print("Assistant:", reply)
-    except APIError as e:
-        print("APIError:", e)
+# if __name__ == "__main__":
+
+#     try:
+#         print("Sending:", user_request)
+#         reply = send_request(user_request)
+#         print("Assistant:", reply)
+#     except APIError as e:
+#         print("APIError:", e)
 
