@@ -33,6 +33,15 @@ class AICLI(App):
         padding: 1; /* Add some padding inside the panel */
         overflow-y: scroll;          /* Important! So older messages are visible */
     }
+    
+    /* Добавляем немного стиля для нового виджета вывода в правой панели */
+    #api-output {
+        height: auto; /* Позволяет тексту занимать нужное место */
+        margin-bottom: 1;
+        padding: 0 1;
+
+    }
+
 
     /* New class for the "spacer" that takes up all available space */
     .spacer {
@@ -57,45 +66,43 @@ class AICLI(App):
     user_request = reactive("")
 
     def compose(self) -> ComposeResult:
+
         with Horizontal(id="main-area"):
             with Container(id="left-panel"):    
                 yield Static(id="term")
             
             with Container(id="right-panel"):
-  
+    
+                yield Static("", id="api-output") 
+                
                 yield Static(classes="spacer") 
                 
                 with Vertical(id="right-panel-controls"):
                     yield Input(placeholder="", id="user-input")
 
-    def on_input_submitted(self, event: Input.Submitted) -> None:        # here api logic too
+    def on_input_submitted(self, event: Input.Submitted) -> None:
+        
+        if event.input.id == "user-input":
+            user_text = event.value.strip()
+            
+            self.query_one("#user-input").value = ""
+            
+            if user_text:  # Если строка не пустая, продолжаем обработку
+                self.user_request = user_text
+                print(f"New request: '{self.user_request}'")
 
-            if event.input.id == "user-input":
-                # Get text from the input field
-                user_text = event.value.strip()
-                
-                if user_text:  # If not an empty string
-                    # Save to the reactive variable
-                    self.user_request = user_text
-                    print(f"New request: '{self.user_request}'")  # For debugging
-
-                    # Here you can add logic to send to the AI, write to the chat, etc.
-                    # For example: self.add_message_to_chat("You", user_text)
-
+                # Получаем ссылку на виджет вывода в правой панели
+                output_widget = self.query_one("#api-output", Static)
+                output_widget.update("Status: Sending request...")
 
                 try:
-                    # Переменная self.user_request передается как аргумент prompt
+                    # Отправляем запрос
                     reply = send_request(prompt=self.user_request)
-
-                    # Выводим ответ от API в ваше поле right-panel 
-                    self.query_one("#right-panel", Static).update(f"Assistant: {reply}")
+                    output_widget.update(f"Assistant: {reply}")
                     
                 except APIError as e:
-                    self.query_one("#right-panel", Static).update(f"API Error: {e}")
+                    output_widget.update(f"API Error: {e}")
                         
-                    # Clear the input field
-                    self.query_one("#user-input").value = ""
-
 
 if __name__ == "__main__":
     AICLI().run()
