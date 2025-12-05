@@ -2,9 +2,7 @@ from textual.app import App, ComposeResult
 from textual.widgets import Static, Input
 from textual.containers import Container, Horizontal, Vertical
 from textual.reactive import reactive # For the reactive variable
-
 from api import send_request, APIError 
-
 
 class AICLI(App):
     CSS = """
@@ -54,7 +52,6 @@ class AICLI(App):
         background: $surface-darken-3;
     }
 
-
     """
 
     user_request = reactive("")
@@ -71,8 +68,7 @@ class AICLI(App):
                 with Vertical(id="right-panel-controls"):
                     yield Input(placeholder="", id="user-input")
 
-
-    def on_input_submitted(self, event: Input.Submitted) -> None:
+    def on_input_submitted(self, event: Input.Submitted) -> None:        # here api logic too
 
             if event.input.id == "user-input":
                 # Get text from the input field
@@ -90,22 +86,15 @@ class AICLI(App):
                 try:
                     # Переменная self.user_request передается как аргумент prompt
                     reply = send_request(prompt=self.user_request)
-                    
-                    # Выводим ответ от API в ваше поле term (Static виджет)
-                    self.query_one("#term", Static).update(f"Assistant: {reply}")
+
+                    # Выводим ответ от API в ваше поле right-panel 
+                    self.query_one("#right-panel", Static).update(f"Assistant: {reply}")
                     
                 except APIError as e:
-                    # Обрабатываем ошибки API и выводим их в интерфейс
-                    self.query_one("#term", Static).update(f"API Error: {e}")
-                # 👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆
-
-
-
-
-
-
-                # Clear the input field
-                self.query_one("#user-input").value = ""
+                    self.query_one("#right-panel", Static).update(f"API Error: {e}")
+                        
+                    # Clear the input field
+                    self.query_one("#user-input").value = ""
 
 
 if __name__ == "__main__":
