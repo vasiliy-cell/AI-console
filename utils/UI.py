@@ -3,7 +3,7 @@ from textual.widgets import Static, Input
 from textual.containers import Container, Horizontal, Vertical
 from textual.reactive import reactive # For the reactive variable
 from api import send_request, APIError 
-
+    
 class AICLI(App):
     CSS = """
     Screen {
@@ -16,13 +16,6 @@ class AICLI(App):
         layout: horizontal;
     }
 
-    #left-panel {
-        width: 2fr;
-        border: round $accent;
-        margin: 1 1;
-        background: $surface-darken-3;
-        overflow-y: scroll;          /* Important! So older messages are visible */
-    }
 
     #right-panel {
         width: 1fr;
@@ -68,8 +61,6 @@ class AICLI(App):
     def compose(self) -> ComposeResult:
 
         with Horizontal(id="main-area"):
-            with Container(id="left-panel"):    
-                yield Static(id="term")
             
             with Container(id="right-panel"):
     
