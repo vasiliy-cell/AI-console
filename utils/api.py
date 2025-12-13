@@ -1,34 +1,59 @@
-import requests
+import aiohttp
+import json
 from lib import load_api_key, ConfigError
 from errors import APIError
 
-
 DEEPSEEK_URL = "https://api.deepseek.com/v1/chat/completions"
 
-def send_request(prompt: str) -> str:
-    """Send prompt to DeepSeek and return assistant's reply."""
+
+async def stream_request(prompt: str):
+    """Async generator yielding chunks of assistant text."""
+    api_key = load_api_key()
+
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+    }
+
+    payload = {
+        "model": "deepseek-chat",
+        "stream": True,
+        "messages": [{"role": "user", "content": prompt}],
+    }
+
     try:
-        api_key = load_api_key()
+        async with aiohttp.ClientSession() as session:
+            async with session.post(
+                DEEPSEEK_URL,
+                headers=headers,
+                json=payload,
+                timeout=None,
+            ) as response:
 
-        headers = {
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json"
-        }
+                if response.status != 200:
+                    text = await response.text()
+                    raise APIError(f"HTTP {response.status}: {text}")
 
-        payload = {
-            "model": "deepseek-chat",
-            "messages": [{"role": "user", "content": prompt}]
-        }
+                async for line in response.content:
+                    line = line.decode("utf-8").strip()
 
-        response = requests.post(DEEPSEEK_URL, headers=headers, json=payload)
-        response.raise_for_status()
-        data = response.json()
-        return data["choices"][0]["message"]["content"]
+                    if not line or not line.startswith("data:"):
+                        continue
 
-    except requests.RequestException as e:
-        raise APIError(f"Request failed: {e}") from e
-    except KeyError as e:
-        raise APIError("Invalid API response format") from e
+                    data = line.removeprefix("data: ").strip()
+
+                    if data == "[DONE]":
+                        break
+
+                    chunk = json.loads(data)
+                    delta = chunk["choices"][0]["delta"]
+
+                    if "content" in delta:
+                        yield delta["content"]
+
+    except aiohttp.ClientError as e:
+        raise APIError(f"Streaming failed: {e}") from e
+    except (KeyError, json.JSONDecodeError) as e:
+        raise APIError("Invalid streaming response") from e
     except ConfigError as e:
         raise APIError(f"Config error: {e}") from e
-

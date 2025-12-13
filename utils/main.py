@@ -1,51 +1,39 @@
 from textual.app import App, ComposeResult
-from textual.widgets import Static, Input, Markdown
-from textual.containers import Container, Horizontal, Vertical
-from textual.reactive import reactive  # For the reactive variable
-from api import send_request, APIError
+from textual.widgets import Input, Markdown, Static
+from textual.containers import Horizontal, Vertical, Container
+from api import stream_request, APIError
 
 
 class AICLI(App):
     CSS_PATH = "style.css"
 
-    user_request = reactive("")
-
     def compose(self) -> ComposeResult:
-
-        with Horizontal(id="main-area"):
-
-            with Container(id="right-panel"):
-
-                # Markdown вместо Static
+        with Horizontal():
+            with Container():
                 yield Markdown("", id="api-output")
-
                 yield Static(classes="spacer")
+                with Vertical():
+                    yield Input(id="user-input")
 
-                with Vertical(id="right-panel-controls"):
-                    yield Input(placeholder="", id="user-input")
+    async def on_input_submitted(self, event: Input.Submitted) -> None:
+        prompt = event.value.strip()
+        event.input.value = ""
 
-    def on_input_submitted(self, event: Input.Submitted) -> None:
+        if not prompt:
+            return
 
-        if event.input.id == "user-input":
-            user_text = event.value.strip()
+        output = self.query_one("#api-output", Markdown)
+        output.update("**Assistant:**\n\n")
 
-            self.query_one("#user-input").value = ""
+        full_text = ""
 
-            if user_text:
-                self.user_request = user_text
-                print(f"New request: '{self.user_request}'")
+        try:
+            async for token in stream_request(prompt):
+                full_text += token
+                output.update(f"**Assistant:**\n\n{full_text}")
 
-                output_widget = self.query_one("#api-output", Markdown)
-                output_widget.update("**Status:** Sending request...")
-
-                try:
-                    reply = send_request(prompt=self.user_request)
-
-                    # Markdown поддерживается автоматически
-                    output_widget.update(f"**Assistant:**\n\n{reply}")
-
-                except APIError as e:
-                    output_widget.update(f"**API Error:** `{e}`")
+        except APIError as e:
+            output.update(f"**API Error:** `{e}`")
 
 
 if __name__ == "__main__":
