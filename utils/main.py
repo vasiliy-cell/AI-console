@@ -30,14 +30,21 @@ class AICLI(App):
                     yield Input(id="user-input")
                     yield Static(self.ascii_art, id="ascii-art")
                     yield Static("Hey there! Let’s jump in", id="welcome-text1") 
-                    yield Static("Linux is the best OS", id="welcome-text2") 
+                    yield Static("linux is the best OS", id="welcome-text2") 
+
 
     async def on_input_submitted(self, event: Input.Submitted) -> None:
         user_request = event.value.strip()
-        event.input.value = ""  # Очищаем поле ввода
+        event.input.value = ""
+
 
         if not user_request:
             return
+
+        output = self.query_one("#api-output", Markdown)
+        output.update("**Assistant:**\n\n")
+
+
 
         # Получаем ссылку на элементы, которые нужно скрыть
         welcome_text1 = self.query_one("#welcome-text1", Static)
@@ -49,9 +56,9 @@ class AICLI(App):
         welcome_text2.update("")
         ascii_art.update("")
 
-        # Обновляем область вывода для ответа от API
-        output = self.query_one("#api-output", Markdown)
-        output.update("**Assistant:**\n\n")
+
+
+
 
         full_text = ""
 
