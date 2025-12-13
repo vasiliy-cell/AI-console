@@ -6,6 +6,24 @@ Screen {
 }
 
 
+Input {
+    dock: bottom;
+    height: 3;
+    background: #222629;
+    margin: 0;
+    padding: 0 2;
+    color: #ffffff;
+    border: round transparent #86c231;
+}
+
+#ascii-art {
+    content-align: center middle;
+    color: #86c231;
+    padding: 1 2;
+}
+
+
+
 Markdown .strong {
     color: #14A76C;   /* жирный текст */
 }
@@ -29,15 +47,3 @@ Markdown .link {
 Markdown .code_block {
     color: #8888FF;   
 }
-
-
-Input {
-    dock: bottom;
-    height: 3;
-    background: #222629;
-    margin: 0;
-    padding: 0 2;
-    color: #ffffff;
-    border: round transparent #86c231;
-}
-

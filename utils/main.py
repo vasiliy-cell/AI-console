@@ -7,6 +7,20 @@ from api import stream_request, APIError
 class AICLI(App):
     CSS_PATH = "style.css"
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.ascii_art = self.load_ascii_art_file()
+
+    def load_ascii_art_file(self):
+        import os
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(script_dir, "ASCII.txt")
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                return f.read()
+        except FileNotFoundError:
+            return "ASCII art file not found."
+
     def compose(self) -> ComposeResult:
         with Horizontal():
             with Container():
@@ -14,8 +28,7 @@ class AICLI(App):
                 yield Static(classes="spacer")
                 with Vertical():
                     yield Input(id="user-input")
-
-
+                    yield Static(self.ascii_art, id="ascii-art")
 
 
     async def on_input_submitted(self, event: Input.Submitted) -> None:
