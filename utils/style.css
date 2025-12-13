@@ -16,10 +16,20 @@ Input {
     border: round transparent #86c231;
 }
 
+#welcome-text1{
+    content-align: center middle;
+    color: #6a6e71;
+    padding-bottom: 1;
+}
+#welcome-text2{
+    content-align: center middle;
+    color: #464a4f; 
+}
+
 #ascii-art {
     content-align: center middle;
     color: #86c231;
-    padding: 1 2;
+
 }
 
 
