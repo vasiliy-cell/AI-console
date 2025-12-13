@@ -32,13 +32,3 @@ def send_request(prompt: str) -> str:
     except ConfigError as e:
         raise APIError(f"Config error: {e}") from e
 
-
-# if __name__ == "__main__":
-
-#     try:
-#         print("Sending:", user_request)
-#         reply = send_request(user_request)
-#         print("Assistant:", reply)
-#     except APIError as e:
-#         print("APIError:", e)
-

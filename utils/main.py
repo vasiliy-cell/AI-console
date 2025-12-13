@@ -6,49 +6,7 @@ from api import send_request, APIError
 
 
 class AICLI(App):
-    CSS = """
-    Screen {
-        layout: vertical;
-        background: $surface-darken-3;
-    }
-
-    #main-area {
-        height: 1fr;
-        layout: horizontal;
-    }
-
-    #right-panel {
-        width: 1fr;
-        border: round $accent;
-        margin: 1 1 1 0;
-        background: $surface-darken-3;
-        layout: vertical;
-        padding: 1;
-        overflow-y: scroll;
-    }
-
-    #api-output {
-        height: auto;
-        margin-bottom: 1;
-        padding: 0 1;
-    }
-
-    .spacer {
-        height: 0.4fr;
-        width: 0.4fr;
-    }
-
-    #right-panel-controls {
-        height: auto;
-    }
-
-    Input {
-        width: 1fr;
-        margin-bottom: 0;
-        border: round $accent;
-        background: $surface-darken-3;
-    }
-    """
+    CSS_PATH = "style.css"
 
     user_request = reactive("")
 
