@@ -1,41 +1,43 @@
 Screen {
     layout: vertical;
-    background: $surface-darken-3;
+    background: #222629;
+    border: round #628931;
+    padding: 1 2;
 }
 
-#main-area {
-    height: 1fr;
-    layout: horizontal;
+
+Markdown .strong {
+    color: #14A76C;   /* жирный текст */
 }
 
-#right-panel {
-    width: 1fr;
-    border: round $accent;
-    margin: 1 1 1 0;
-    background: $surface-darken-3;
-    layout: vertical;
-    padding: 1;
-    overflow-y: scroll;
+Markdown .emph {
+    color: #FFE400;   /* курсив */
 }
-
-#api-output {
-    height: auto;
-    margin-bottom: 1;
+Markdown .code {
+    color: #FF652F;   /* inline code */
+    background: #141414;
     padding: 0 1;
+    border: round #FF652F;
 }
 
-.spacer {
-    height: 0.4fr;
-    width: 0.4fr;
+Markdown .heading {
+    color: #00BFFF;  
+}
+Markdown .link {
+    color: #FF00FF;   
+}
+Markdown .code_block {
+    color: #8888FF;   
 }
 
-#right-panel-controls {
-    height: auto;
-}
 
 Input {
-    width: 1fr;
-    margin-bottom: 0;
-    border: round $accent;
-    background: $surface-darken-3;
+    dock: bottom;
+    height: 3;
+    background: #222629;
+    margin: 0;
+    padding: 0 2;
+    color: #ffffff;
+    border: round transparent #86c231;
 }
+

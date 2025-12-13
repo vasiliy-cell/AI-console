@@ -6,7 +6,7 @@ from errors import APIError
 DEEPSEEK_URL = "https://api.deepseek.com/v1/chat/completions"
 
 
-async def stream_request(prompt: str):
+async def stream_request(user_request: str):
     """Async generator yielding chunks of assistant text."""
     api_key = load_api_key()
 
@@ -18,7 +18,7 @@ async def stream_request(prompt: str):
     payload = {
         "model": "deepseek-chat",
         "stream": True,
-        "messages": [{"role": "user", "content": prompt}],
+        "messages": [{"role": "user", "content": user_request}],
     }
 
     try:

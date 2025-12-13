@@ -15,11 +15,15 @@ class AICLI(App):
                 with Vertical():
                     yield Input(id="user-input")
 
+
+
+
     async def on_input_submitted(self, event: Input.Submitted) -> None:
-        prompt = event.value.strip()
+        user_request = event.value.strip()
         event.input.value = ""
 
-        if not prompt:
+
+        if not user_request:
             return
 
         output = self.query_one("#api-output", Markdown)
@@ -28,7 +32,7 @@ class AICLI(App):
         full_text = ""
 
         try:
-            async for token in stream_request(prompt):
+            async for token in stream_request(user_request):
                 full_text += token
                 output.update(f"**Assistant:**\n\n{full_text}")
 
