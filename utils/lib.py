@@ -1,29 +1,20 @@
-from pathlib import Path
-import stat
-from typing import Optional
-
-AICLI_path = Path.home() / ".config" / "AICLI" / "api_key.txt"
-
 class ConfigError(Exception):
     pass    
 
-
 def load_api_key() -> str:
-
-    # 1. is there such
-
-    if not AICLI_path.exists():
-        raise ConfigError("API key file not found: {AICLI_path}")
+    filename = "api_key.txt"  # файл в той же директории
     
-    # 2. reading file
+    # 1. Проверка существования файла и чтение
     try:
-        with AICLI_path.open(mode='r', encoding='utf-8') as f:
+        with open(filename, "r", encoding="utf-8") as f:
             api_key = f.readline().strip()
+    except FileNotFoundError:
+        raise ConfigError(f"API key file not found: {filename}")
     except OSError as e:
         raise ConfigError(f"Failed to read API key file: {e}")
     
-    if not api_key: 
+    # 2. Проверка на пустой ключ
+    if not api_key:
         raise ConfigError("API key is empty or contains only whitespace")
     
     return api_key
-
