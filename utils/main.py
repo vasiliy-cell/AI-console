@@ -30,7 +30,7 @@ class AICLI(App):
                     yield Input(id="user-input")
                     yield Static(self.ascii_art, id="ascii-art")
                     yield Static("Hey there! Let’s jump in", id="welcome-text1") 
-                    yield Static("linux is the best OS", id="welcome-text2") 
+#                    yield Static("linux is the best OS", id="welcome-text2") 
 
 
     async def on_input_submitted(self, event: Input.Submitted) -> None:
@@ -53,7 +53,7 @@ class AICLI(App):
 
         # Скрываем приветственные тексты и ASCII-арт
         welcome_text1.update("")
-        welcome_text2.update("")
+#        welcome_text2.update("")
         ascii_art.update("")
 
 
