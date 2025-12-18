@@ -4,6 +4,7 @@ and the AI-powered API will automatically convert it into the correct command.
 
 
 # Installation Guide
+# before Installation you need pip for requirements
 
 ## 1. Create API Key
 1. Go to: https://platform.deepseek.com/api_keys
