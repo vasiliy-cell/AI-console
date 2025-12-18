@@ -2,7 +2,15 @@ Screen {
     background: #222629;
     border: round #628931;
     padding: 1 2;
+
 }
+
+#chat-panel{
+    overflow-y: auto;   
+}
+
+
+
 
 
 Input {

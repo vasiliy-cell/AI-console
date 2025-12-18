@@ -1,6 +1,6 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Input, Markdown, Static
-from textual.containers import Vertical
+from textual.containers import VerticalScroll, Vertical
 from api import stream_request, APIError
 import os
 
@@ -22,12 +22,12 @@ class AICLI(App):
             return "ASCII art file not found."
 
     def compose(self) -> ComposeResult:
-        # Главный вертикальный контейнер — всё по центру
+        # Главный вертикальный контейнер
         with Vertical(id="main", classes="centered"):
             yield Static(self.ascii_art, id="ascii-art")
             yield Static("Hey there! Let’s jump in", id="welcome-text1")
             yield Static("linux is the best OS", id="welcome-text2")
-            yield Vertical(id="chat-panel")
+            yield VerticalScroll(id="chat-panel")  # <-- вертикальный скролл
             yield Input(id="user-input", placeholder="Type your message...")
 
     async def on_input_submitted(self, event: Input.Submitted) -> None:
@@ -37,15 +37,17 @@ class AICLI(App):
         if not user_request:
             return
 
-        chat_panel = self.query_one("#chat-panel", Vertical)
+        chat_panel = self.query_one("#chat-panel", VerticalScroll)
 
-        # Сообщение пользователя
+        # Добавляем Markdown как раньше
         user_md = Markdown(f"**You:** {user_request}\n")
         chat_panel.mount(user_md)
 
-        # Сообщение ассистента
         assistant_md = Markdown("**Assistant:**\n\n")
         chat_panel.mount(assistant_md)
+
+        # Скроллим вниз при новых сообщениях
+        chat_panel.scroll_end(animate=False)
 
         # Скрываем приветствие
         self.query_one("#welcome-text1", Static).update("")
@@ -66,3 +68,4 @@ class AICLI(App):
 
 if __name__ == "__main__":
     AICLI().run()
+
