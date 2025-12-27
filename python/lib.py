@@ -19,5 +19,5 @@ def load_api_key() -> str:
 
     if not api_key:
         raise ConfigError("API key is empty or contains only whitespace")
-
     return api_key
+ 
