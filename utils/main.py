@@ -22,7 +22,7 @@ class AICLI(App):
         file_path = os.path.join(script_dir, "ASCII.txt")
         try:
             with open(file_path, "r", encoding="utf-8") as f:
-                return f.read()
+                return f.read() 
         except FileNotFoundError:
             return "ASCII art file not found."
 
