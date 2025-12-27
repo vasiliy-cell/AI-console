@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Dev Workspace</title>
+    <link rel="stylesheet" href="style.css">
+</head>.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Левая панель: Терминал -->
+        <section class="panel terminal">
+            <div class="panel-header">Terminal</div>
+            <div class="panel-content" id="terminal-output">
+                <div class="line"><span class="prompt">user@fedora:~$</span> ls -la</div>
+                <div class="line">total 0</div>
+                <div class="line cursor-line"><span class="prompt">user@fedora:~$</span><span class="cursor">|</span></div>
+            </div>
+        </section>
+
+        <!-- Правая панель: Чат -->
+        <section class="panel chat">
+            <div class="panel-header">AI Assistant</div>
+            <div class="panel-content" id="chat-messages">
+                <div class="message bot">Чем я могу помочь?</div>
+                <div class="message user">Как установить Rust?</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" placeholder="Введите сообщение...">
+                <button>Отправить</button>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
