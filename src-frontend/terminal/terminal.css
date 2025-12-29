@@ -1,5 +1,10 @@
+
 #terminal-panel {
-  background-color: #ff0000;
-  width: 40px;
-  height: 300px;
-} 
+  background-color: #161617;
+    backdrop-filter: blur(5px);
+    flex: 1;
+    border-radius: 15px;
+    box-sizing: border-box;
+    /* background-color: rgba(24, 25, 32, 0.9);
+    border-color: #2a2c33; */
+}
