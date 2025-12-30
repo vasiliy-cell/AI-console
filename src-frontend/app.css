@@ -9,7 +9,7 @@ body{
     height: 100vh;      /* высота экрана */
     padding: 5px;       /* внутренние отступы контейнера */
     /* background-color: beige; */
-    background: linear-gradient(90deg, #fca54d, #fc7a67, #ff7bfb, #00d787);
+    background: linear-gradient(90deg,   #fca54d, #fc7a67, #ff7bfb, #00d787);
 }
 
 
@@ -24,7 +24,7 @@ body{
 #header{
     width: 50%;
     Margin: auto;
-    height: 40px;
+    height: 40px;   
     flex: 1;
     border-radius: 15px;
     border: #161617 solid; 
