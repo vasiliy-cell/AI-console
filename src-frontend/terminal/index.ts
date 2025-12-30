@@ -1,26 +1,27 @@
 import { Terminal } from "@xterm/xterm";
 import { FitAddon } from "@xterm/addon-fit";
-import "@xterm/xterm/css/xterm.css";
 
 export function initTerminal() {
   const term = new Terminal({
     cursorBlink: true,
-    theme: {
-      background: '#161617', // Под цвет вашего конфига
-    },
-    allowProposedApi: true
+    // Оставляем тему пустой, чтобы CSS мог перекрывать цвета
+    theme: {}, 
   });
 
   const fitAddon = new FitAddon();
   term.loadAddon(fitAddon);
 
-  const container = document.getElementById('terminal-panel')!;
+  const container = document.getElementById('terminal-panel');
+  if (!container) {
+    console.error("Контейнер #terminal-panel не найден!");
+    return null;
+  }
+
   term.open(container);
 
-  // Важно: fit() работает только если контейнер имеет физический размер
-  fitAddon.fit();
+  // Небольшая задержка для корректного расчета размера
+  setTimeout(() => fitAddon.fit(), 10);
 
-  // Подстраиваем размер при изменении окна
   window.addEventListener('resize', () => fitAddon.fit());
 
   return { term, fitAddon };

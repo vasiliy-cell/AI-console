@@ -1,6 +1,5 @@
 api_key.txt
 .venv
 .vscode
-node_modules
 package-lock.json
 package.json

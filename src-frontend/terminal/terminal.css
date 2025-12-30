@@ -10,7 +10,78 @@
 }
 
 
-.xterm, .xterm-viewport, .xterm-screen {
-    width: 100%;
+
+
+
+
+
+
+
+/* Базовый контейнер терминала */
+.xterm {
+    cursor: text;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
     height: 100%;
+        border-radius: 15px;
+}
+
+
+#terminal-panel {
+  background-color: #161617;
+      border-radius: 15px;
+}
+
+
+
+/* Скрытая область для ввода (чтобы работал фокус) */
+.xterm .xterm-helper-textarea {
+    position: absolute;
+    opacity: 0;
+    left: -9999em;
+    top: 0;
+    width: 0;
+    height: 0;
+    z-index: -5;
+}
+
+/* Область прокрутки */
+.xterm .xterm-viewport {
+  background-color: #161617;
+    overflow-y: auto;
+    cursor: default;
+    position: absolute;
+    inset: 0; /* Растянуть на весь родитель */
+}
+
+/* Слой для отрисовки текста */
+.xterm .xterm-screen {
+    position: relative;
+    display: block;
+}
+
+.xterm .xterm-screen canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Вспомогательные элементы (курсор, выделение) */
+.xterm .xterm-helpers {
+    position: absolute;
+    top: 0;
+    z-index: 5;
+}
+
+
+
+/* Очистка стилей шрифта для измерения символов */
+.xterm-char-measure-element {
+    display: inline-block;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: -9999em;
+    line-height: normal;
 }
