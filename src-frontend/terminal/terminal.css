@@ -1,64 +1,63 @@
-
+/* Главный контейнер-панель */
 #terminal-panel {
-  background-color: #161617;
-  box-sizing: border-box;
+    background-color: #161617;
     flex: 1;
     border-radius: 15px;
     box-sizing: border-box;
-
-    /* background-color: rgba(24, 25, 32, 0.9); */
+    padding: 12px; /* Внутренний отступ, чтобы текст не прилипал к краям */
+    overflow: hidden; /* Важно, чтобы содержимое не вылезало за скругления */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Легкая граница для объема */
 }
 
-
-
-
-
-
-
-
-
-/* Базовый контейнер терминала */
+/* Базовый контейнер xterm */
 .xterm {
     cursor: text;
     position: relative;
     user-select: none;
     -webkit-user-select: none;
     height: 100%;
-        border-radius: 15px;
+    width: 100%;
 }
 
-
-#terminal-panel {
-  background-color: #161617;
-      border-radius: 15px;
+/* Область прокрутки и фон текста */
+.xterm .xterm-viewport,
+.xterm .xterm-screen,
+.xterm .xterm-rows {
+    background-color: #161617 !important; /* Убираем стандартный черный */
+    border-radius: 10px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
 }
 
+/* Стилизация скроллбара (делаем его современным и тонким) */
+.xterm .xterm-viewport::-webkit-scrollbar {
+    width: 8px;
+}
 
+.xterm .xterm-viewport::-webkit-scrollbar-track {
+    background: transparent;
+}
 
-/* Скрытая область для ввода (чтобы работал фокус) */
+.xterm .xterm-viewport::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.xterm .xterm-viewport::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Убираем рамку фокуса */
+.xterm.focus, .xterm:focus {
+    outline: none;
+}
+
+/* Вспомогательные системные стили (не менять) */
 .xterm .xterm-helper-textarea {
     position: absolute;
     opacity: 0;
     left: -9999em;
-    top: 0;
-    width: 0;
-    height: 0;
+    width: 0; height: 0;
     z-index: -5;
-}
-
-/* Область прокрутки */
-.xterm .xterm-viewport {
-  background-color: #161617;
-    overflow-y: auto;
-    cursor: default;
-    position: absolute;
-    inset: 0; /* Растянуть на весь родитель */
-}
-
-/* Слой для отрисовки текста */
-.xterm .xterm-screen {
-    position: relative;
-    display: block;
 }
 
 .xterm .xterm-screen canvas {
@@ -67,16 +66,6 @@
     top: 0;
 }
 
-/* Вспомогательные элементы (курсор, выделение) */
-.xterm .xterm-helpers {
-    position: absolute;
-    top: 0;
-    z-index: 5;
-}
-
-
-
-/* Очистка стилей шрифта для измерения символов */
 .xterm-char-measure-element {
     display: inline-block;
     visibility: hidden;
