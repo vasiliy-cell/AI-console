@@ -4,36 +4,44 @@
   <meta charset="UTF-8" />
   <title>AICLI</title>
 
-    <!-- Общие Стили -->
+  <!-- Общие Стили -->
   <link rel="stylesheet" href="./src-frontend/app.css">
 
- <!-- Стили терминала -->
+  <!-- Стили терминала -->
   <link rel="stylesheet" href="./src-frontend/terminal/terminal.css">
 
   <!-- Стили AI панели -->
   <link rel="stylesheet" href="./src-frontend/ai-panel/panel.css">
-  
 </head>
 
 <body>
+
+  <!-- HEADER -->
+  <header id="header">
+
+  </header>
+
+  <!-- MAIN APP -->
   <div id="app">
     <div id="terminal-panel"></div>
 
+    <div id="ai-panel">
+      <div id="ai-output"></div>
 
-
-<div id="ai-panel">
-  <div id="ai-output"></div>
-
-  <div id="ai-input-wrapper">
-    <input 
-      type="text" 
-      id="ai-input" 
-      placeholder=""
-      autocomplete="off"
-    />
+      <div id="ai-input-wrapper">
+        <input 
+          type="text" 
+          id="ai-input" 
+          placeholder=""
+          autocomplete="off"
+        />
+      </div>
+    </div>
   </div>
-</div>
 
+
+</body>
+</html>
 
 
 

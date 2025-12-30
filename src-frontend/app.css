@@ -5,10 +5,29 @@
     padding: 0;
 }
 
-#app{
-    display: flex;
+body{
     height: 100vh;      /* высота экрана */
     padding: 5px;       /* внутренние отступы контейнера */
-    gap: 5px;     
-    background: linear-gradient(90deg, #ddd60b, #fca54d, #fc7a67, #ff7bfb, #00d787);
+    /* background-color: beige; */
+    background: linear-gradient(90deg, #fca54d, #fc7a67, #ff7bfb, #00d787);
 }
+
+
+#app{
+    display: flex;
+    height: calc(100vh - 45px);   /* высота экрана */
+    padding: 5px;       /* внутренние отступы контейнера */
+    gap: 5px;     
+
+}
+
+#header{
+    width: 50%;
+    Margin: auto;
+    height: 40px;
+    flex: 1;
+    border-radius: 15px;
+    border: #161617 solid; 
+    background-color: #161617;
+}   
+
