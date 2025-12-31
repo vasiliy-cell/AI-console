@@ -1,4 +1,7 @@
+import { defineConfig } from 'vite'
+
 export default defineConfig({
-  base: '/', // Должно быть так для локальной разработки
-  // ... остальные настройки
+    server: {
+        port: 5173,
+    },
 })
