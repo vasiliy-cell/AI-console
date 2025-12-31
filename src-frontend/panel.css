@@ -1,0 +1,42 @@
+#ai-panel {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    border-radius: 15px;
+    border: #161617 solid; 
+    background-color: #161617;
+}
+
+/* Область вывода занимает всё сверху */
+#ai-output {
+    flex: 1;                 /* главное */
+    padding: 10px;
+    overflow-y: auto;
+
+    color: #fff;
+    font-family: monospace;
+}
+
+/* Блок с input всегда внизу */
+#ai-input-wrapper {
+    padding: 8px;
+    border-top: solid #161617;
+
+}
+
+/* Input */
+#ai-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+
+    /* Создаем эффект градиентной рамки */
+    border: 1px solid transparent; /* Делаем основную рамку прозрачной */
+    background: 
+        linear-gradient(#161617, #161617) padding-box, /* Внутренний фон блока */
+        linear-gradient(270deg, #fca54d, #fc7a67, #ff7bfb, #00d787) border-box; /* Отзеркаленный градиент рамки */
+}

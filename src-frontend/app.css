@@ -8,9 +8,53 @@
 body{
     height: 100vh;      /* высота экрана */
     padding: 5px;       /* внутренние отступы контейнера */
-    /* background-color: beige; */
+
     background: linear-gradient(90deg,   #fca54d, #fc7a67, #ff7bfb, #00d787);
 }
+
+
+
+
+
+
+
+
+
+
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background: linear-gradient(
+        120deg,
+        #fca54d,
+        #fc7a67,
+        #ff7bfb,
+        #00d787,
+        #fca54d
+    );
+
+    background-size: 500% 500%;
+    animation: gradientFlow 10s ease-in-out infinite;
+
+    z-index: -1;
+}
+
+@keyframes gradientFlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 
 
 #app{
