@@ -6,6 +6,9 @@
     border-radius: 15px;
     border: #161617 solid; 
     background-color: #161617;
+      flex: 1;
+  height: 100%;
+  overflow: hidden;
 
 }
 

@@ -10,3 +10,6 @@ window.onload = () => {
     term.write('AICLI Terminal \x1b[32mInitialized\x1b[0m\r\n$ ');
   }
 };
+
+
+
