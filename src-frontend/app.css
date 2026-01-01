@@ -27,6 +27,8 @@ body {
     height: 100vh;
     overflow: hidden;
     position: relative;
+    
+    
 }
 
 body::before {
@@ -55,14 +57,14 @@ body::before {
     100% { background-position: 0% 50%; }
 }
 
-
-
-#app{
+#app {
+    height: calc(100vh - 45px);
+    padding: 5px;
+}
+#app-inner {
     display: flex;
-    height: calc(100vh - 45px);   /* высота экрана */
-    padding: 5px;       /* внутренние отступы контейнера */
-    gap: 5px;     
-
+    height: 100%;
+    width: 100%;
 }
 
 #header{
@@ -87,7 +89,7 @@ body::before {
 
 #theme-switcher{
     background-color: #161617;
-    width: 60px;
+    width: 80px;
     height: 40px;
     border-radius: 15px;
     border: #161617 solid; 
@@ -100,4 +102,24 @@ body::before {
     margin-right: 5px;
 
 
+}
+
+
+
+
+
+
+
+
+
+#splitter {
+    flex: 0 0 6px;
+    width: 6px;
+    cursor: col-resize;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+}
+
+#splitter:hover {
+    background: rgba(255, 255, 255, 0.2);
 }

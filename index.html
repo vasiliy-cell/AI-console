@@ -16,20 +16,29 @@
   </header>
 
   <div id="app">
-    <div id="terminal-panel"></div>
+    <div id="app-inner">
+              <div id="terminal-panel"></div>
 
-    <div id="ai-panel">
-      <div id="ai-output"></div>
-      <div id="ai-input-wrapper">
-        <input
-          type="text"
-          id="ai-input"
-          autocomplete="off"
-        />
-      </div>
+        <div id="splitter"></div>
+
+
+
+        <div id="ai-panel">
+          <div id="ai-output"></div>
+          <div id="ai-input-wrapper">
+            <input
+              type="text"
+              id="ai-input"
+              autocomplete="off"
+            />
+          </div>
+        </div>
     </div>
+
   </div>
 
 <script type="module" src="./src-frontend/app.ts"></script>
+<script type="module" src="./src-frontend/splitter.js"></script>
+
 </body>
 </html>
