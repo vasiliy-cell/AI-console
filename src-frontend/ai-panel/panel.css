@@ -1,12 +1,14 @@
 #ai-panel {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 2;
+
+
 
     border-radius: 15px;
     border: #161617 solid; 
     background-color: #161617;
-      flex: 1;
+
   height: 100%;
   overflow: hidden;
 
@@ -44,3 +46,7 @@
         linear-gradient(#161617, #161617) padding-box, /* Внутренний фон блока */
         linear-gradient(270deg, #fca54d, #fc7a67, #ff7bfb, #00d787) border-box; /* Отзеркаленный градиент рамки */
 }
+
+
+
+

@@ -1,12 +1,16 @@
 /* Главный контейнер-панель */
 #terminal-panel {
     background-color: #161617;
-    flex: 1;
+    flex: 3;
+
+    min-width: 0;           /* важно для xterm */
+
     border-radius: 15px;
     box-sizing: border-box;
     padding: 12px; /* Внутренний отступ, чтобы текст не прилипал к краям */
     overflow: hidden; /* Важно, чтобы содержимое не вылезало за скругления */
     border: 1px solid rgba(255, 255, 255, 0.05); /* Легкая граница для объема */
+
 }
 
 /* Базовый контейнер xterm */

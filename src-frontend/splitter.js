@@ -1,3 +1,5 @@
+// src-frontend/splitter.js
+
 const app = document.getElementById("app");
 const splitter = document.getElementById("splitter");
 const leftPanel = document.getElementById("terminal-panel");
@@ -12,9 +14,14 @@ splitter.addEventListener("mousedown", () => {
 });
 
 document.addEventListener("mouseup", () => {
+  if (!isDragging) return;
+
   isDragging = false;
   document.body.style.cursor = "";
   document.body.style.userSelect = "";
+
+  // ⬅ финальный принудительный resize терминала
+  document.dispatchEvent(new Event("terminal-resize"));
 });
 
 document.addEventListener("mousemove", (e) => {
@@ -39,6 +46,9 @@ document.addEventListener("mousemove", (e) => {
   leftPanel.style.flex = "none";
   rightPanel.style.flex = "none";
 
-  leftPanel.style.width = leftWidth + "px";
-  rightPanel.style.width = rightWidth + "px";
+  leftPanel.style.width = `${leftWidth}px`;
+  rightPanel.style.width = `${rightWidth}px`;
+
+  // ⬅ КЛЮЧЕВО: сообщаем терминалу о resize
+  document.dispatchEvent(new Event("terminal-resize"));
 });
