@@ -6,7 +6,7 @@ class ConfigError(Exception):
 
 
 def load_api_key() -> str:
-    # корень проекта = на уровень выше папки utils
+    
     project_root = Path(__file__).resolve().parent
     file_path = project_root / "api_key.txt"
 
