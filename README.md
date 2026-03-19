@@ -3,7 +3,7 @@
 
 **AICLI** is a user-friendly desktop terminal emulator designed specifically for beginners. It integrates a powerful AI assistant that allows you to interact with your system using natural language. Instead of memorizing complex flags or digging through endless documentation, you can simply describe what you want to achieve, and the AI handles the syntax.
 
-## 👶 Built for Beginners
+##  Built for Beginners
 
 - **Natural Language to Commands:** Describe your intent in plain English, and the AI generates the correct command.
 - **Real-time Explanations:** The AI explains what commands do so you can learn while you work.
@@ -12,13 +12,13 @@
 
 --------------------------------------------------------------------------------
 
-## 🏗 System Architecture
+##  System Architecture
 
 The project follows a **Clean Architecture** to ensure speed, safety, and intelligence:
 
-1. **Frontend (The Face):** Built with **HTML, CSS, and TypeScript**, using **xterm.js** to render a high-performance terminal in a dedicated panel.
-2. **Rust Backend / Tauri (The Muscles):** Acts as the bridge between the UI and the system. It manages the **PTY (Pseudo-Terminal)** for running shells like Bash or Zsh and handles window events.
-3. **Python AI Service (The Brain):** A separate process that manages AI logic, prompt engineering, and context. It communicates with the Rust backend via **stdin/stdout** for fast, sandboxed streaming of AI responses.
+1. **Frontend :** Built with **HTML, CSS, and TypeScript**, using **xterm.js** to render a high-performance terminal in a dedicated panel.
+2. **Rust Backend / Tauri :** Acts as the bridge between the UI and the system. It manages the **PTY (Pseudo-Terminal)** for running shells like Bash or Zsh and handles window events.
+3. **Python AI Service :** A separate process that manages AI logic, prompt engineering, and context. It communicates with the Rust backend via **stdin/stdout** for fast, sandboxed streaming of AI responses.
 
 <img width="2752" height="1536" alt="image" src="https://github.com/user-attachments/assets/66cf7bdd-2023-42c4-bdbb-e39dd73d96c4" />
 
