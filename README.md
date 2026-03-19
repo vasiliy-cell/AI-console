@@ -1,160 +1,82 @@
-# AICLI
 
-A beginner-friendly AI-powered terminal.
+⚠️ **DEVELOPMENT STATUS:** This project is currently **under active development** and is approximately **70% complete**. The frontend and AI logic are functional, but full backend integration is still in progress.
 
-## ✨ Why This Exists
-
-I've decided to make the CLI much more user-friendly by integrating AI.  
-From now on, you can simply describe what you want in plain English (or any natural language), and the AI-powered API will automatically convert it into the correct command.
-
-No more memorizing flags.  
-No more digging through documentation.  
-No more fear of breaking something.
-
-Just describe your intent — the terminal handles the syntax.
-
----
+**AICLI** is a user-friendly desktop terminal emulator designed specifically for beginners. It integrates a powerful AI assistant that allows you to interact with your system using natural language. Instead of memorizing complex flags or digging through endless documentation, you can simply describe what you want to achieve, and the AI handles the syntax.
 
 ## 👶 Built for Beginners
 
-Traditional terminals can feel intimidating:
+- **Natural Language to Commands:** Describe your intent in plain English, and the AI generates the correct command.
+- **Real-time Explanations:** The AI explains what commands do so you can learn while you work.
+- **Modern Interface:** A clean GUI featuring a dual-panel layout: a professional terminal on one side and an AI chat assistant on the other.
+- **Safety First:** Reduces the fear of breaking things by helping you understand exactly what will happen before you hit enter.
 
-- Cryptic errors
-    
-- Complex flags
-    
-- Unclear documentation
-    
-- Fear of making mistakes
-    
+--------------------------------------------------------------------------------
 
-AICLI changes that.
+## 🏗 System Architecture
 
-You can:
+The project follows a **Clean Architecture** to ensure speed, safety, and intelligence:
 
-- Ask what a command does
-    
-- Generate the correct command from natural language
-    
-- Get suggestions for safer alternatives
-    
-- Learn while working
-    
+1. **Frontend (The Face):** Built with **HTML, CSS, and TypeScript**, using **xterm.js** to render a high-performance terminal in a dedicated panel.
+2. **Rust Backend / Tauri (The Muscles):** Acts as the bridge between the UI and the system. It manages the **PTY (Pseudo-Terminal)** for running shells like Bash or Zsh and handles window events.
+3. **Python AI Service (The Brain):** A separate process that manages AI logic, prompt engineering, and context. It communicates with the Rust backend via **stdin/stdout** for fast, sandboxed streaming of AI responses.
 
-You don’t need to know the exact syntax.  
-You just need to know what you want to achieve.
+<img width="2752" height="1536" alt="image" src="https://github.com/user-attachments/assets/66cf7bdd-2023-42c4-bdbb-e39dd73d96c4" />
 
----
 
-## 🚀 How It Works
-
-When you run:
-
-$ aicli
-
-A new desktop window opens:
-
-- Left side → real `bash` or `zsh`
-    
-- Right side → built-in AI assistant
-    
-- Responses stream in real time
-    
-- You can interrupt generation anytime
-    
-
----
-
-## 🛠 Requirements
-
-Make sure you have the following installed:
-
-- **Python 3.11+**
-    
-- **Node.js 18+**
-    
-- **Rust + Cargo**
-    
-- **Git**
-    
-
----
+--------------------------------------------------------------------------------
 
 ## 📦 Installation Guide
+**Note:** Because the project is still in its early stages, the manual installation process is currently **complex**. We are working on making it much **simpler and more automated** in future releases.
 
-### 1️⃣ Clone the repository
+To run AICLI, you will need **Python 3.11+**, **Node.js**, and **Rust (Cargo)** installed on your system.
 
-git clone https://github.com/vasiliy-cell/AI-console.git  
+### 1. Clone the Repository
+
+```
+git clone https://github.com/vasiliy-cell/AI-console.git
 cd AICLI
+```
 
----
+### 2. Setup Python AI Service
 
-### 2️⃣ Setup Python (AI Service)
+Navigate to the python directory and create a virtual environment:
 
-Navigate to the Python directory:
-
+```
 cd python
-
-Create a virtual environment:
-
 python -m venv venv
-
-Activate it:
-
-**macOS / Linux**
-
+# Activation (macOS/Linux):
 source venv/bin/activate
-
-
+# Install requirements:
 pip install -r requirements.txt
+```
 
----
+### 3. Add Your API Key
 
-### 🔑 Add Your API Key
+1. Go to: [https://platform.deepseek.com/api_keys](https://www.google.com/url?sa=E&q=https%3A%2F%2Fplatform.deepseek.com%2Fapi_keys)
+2. Create an API Key (paid service, but affordable).
+3. Place your key inside the file: `python/api_key.txt`.
+    - _Note: The file should contain only the API key, without quotes or extra spaces._
 
-1. Go to: https://platform.deepseek.com/api_keys
-    
-2. Create an API Key (paid service, but affordable)
-    
+Create a file named `python/api_key.txt` and paste your AI provider's API key inside (plain text, no quotes).
 
-Then place your key inside:
+### 4. Install Frontend & Launch
 
-python/api_key.txt
+Return to the root directory, install the dependencies, and start the app in development mode:
 
-The file should contain **only the API key**, without quotes or extra spaces.
-
----
-
-### 3️⃣ Install Frontend Dependencies
-
-Go back to the project root:
-
+```
 cd ..
-
-Install Node dependencies:
-
 npm install
-
----
-
-### 4️⃣ Run the Application
-
-Start the desktop app:
-
 npm run tauri dev
+```
 
----
+--------------------------------------------------------------------------------
 
-## 🧠 What Happens Internally
+## 🛠 Core Dependencies
 
-- Python handles AI streaming and prompt logic
-    
-- Rust manages the terminal (PTY, resize, system events)
-    
-- The frontend renders the terminal and AI panel
-    
+AICLI is powered by several industry-standard technologies:
 
-The AI runs as a separate process and communicates via stdin/stdout.
-
----
-
+- **Tauri:** Lightweight framework for native desktop GUIs.
+- **xterm.js:** The gold standard for terminal rendering in the browser.
+- **portable-pty:** A Rust library for low-level terminal process management.
+- **Tokio:** Asynchronous runtime for the Rust backend.
+- **Serde:** High-performance data serialization.
