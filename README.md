@@ -20,7 +20,7 @@ The project follows a **Clean Architecture** to ensure speed, safety, and intell
 2. **Rust Backend / Tauri :** Acts as the bridge between the UI and the system. It manages the **PTY (Pseudo-Terminal)** for running shells like Bash or Zsh and handles window events.
 3. **Python AI Service :** A separate process that manages AI logic, prompt engineering, and context. It communicates with the Rust backend via **stdin/stdout** for fast, sandboxed streaming of AI responses.
 
-<img width="2752" height="1536" alt="image" src="https://github.com/user-attachments/assets/66cf7bdd-2023-42c4-bdbb-e39dd73d96c4" />
+<img width="2752" height="1536" alt="566170647-66cf7bdd-2023-42c4-bdbb-e39dd73d96c4" src="https://github.com/user-attachments/assets/344a27fa-1924-4f7c-aa62-7d4e3242797f" />
 
 
 --------------------------------------------------------------------------------
