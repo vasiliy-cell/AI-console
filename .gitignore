@@ -3,3 +3,12 @@ api_key.txt
 .vscode
 package-lock.json
 package.json
+.node_modules
+node_modules/
+.vite/
+
+
+src-tauri/target/
+src-tauri/.cargo/
+src-tauri/gen/
+src-tauri/.tauri-build/
